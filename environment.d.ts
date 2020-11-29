@@ -3,6 +3,11 @@ declare global {
     interface ProcessEnv {
       NODE_ENV: 'dev' | 'test' | 'production';
       ALEXA_SKILL_ID: string;
+
+      PAGPRO_DB_HOST: string;
+      PAGPRO_DB_USER: string;
+      PAGPRO_DB_DATABASE: string;
+      PAGPRO_DB_PASS: string;
     }
   }
 }

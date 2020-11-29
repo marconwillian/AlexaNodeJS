@@ -4,7 +4,7 @@ RUN mkdir -p /home/node/b4you-alexa-report/node_modules && mkdir -p /home/node/b
 
 WORKDIR /home/node/b4you-alexa-report
 
-COPY package.json yarn.* ./
+COPY --chown=node:node package.json yarn.* ./
 
 USER node
 

@@ -11,9 +11,14 @@ export default {
       version: '1.0',
       response: {
         outputSpeech: {
-          type: 'PlainText',
-          text: 'Marcon, bem vindo a plataforma B4You.',
-          ssml: null
+          type: 'SSML',
+          texta: 'Bem vindo a Plataforma B4You.',
+          ssml: `
+            <speak>
+              <say-as interpret-as="interjection">hey</say-as> Marcon!
+              Bem vindo a Plataforma  <lang xml:lang="en-US">B4You</lang>.
+            </speak>
+          `
         },
         shouldEndSession: false
       }

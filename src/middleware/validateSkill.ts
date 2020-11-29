@@ -9,6 +9,7 @@ export default (request: Request, response: Response, next: NextFunction) => {
   if (xForwardedFor || request.connection.remoteAddress) {
     ip += xForwardedFor?.split(',')[0] || remoteAddress?.split(':').slice(-1);
   }
+  console.log(ip);
 
   const whitelist = /^(72.21.217.\d{1,3}|54.240.197.\d{1,3}|127.0.0.1|172.25.0.\d{1,3})$/;
 

@@ -1,6 +1,6 @@
 {
     "name": "@b4you/report_bot",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "main": "index.js",
     "scripts": {
         "dev": "ts-node-dev src/server.ts",

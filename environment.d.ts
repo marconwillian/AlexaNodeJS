@@ -2,7 +2,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NODE_ENV: 'dev' | 'test' | 'production';
-      HASH_1_SECRET: string;
+      ALEXA_SKILL_ID: string;
     }
   }
 }

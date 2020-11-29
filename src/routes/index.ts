@@ -28,11 +28,11 @@ export default async (request: Request, response: Response) => {
     const alexaRequest = body.request;
     const { session } = body;
 
-    const intent = alexaRequest.intent.name || 'default';
-    const method = alexaRequest.parameters.slots ? 'form' : 'open';
+    const intent = alexaRequest?.intent?.name || 'default';
+    const method = alexaRequest?.parameters?.slots ? 'form' : 'form'; // Rename second for open
 
-    const intentData = alexaRequest.intent.slots || 'default';
-    const sessionId = session.sessionId ? session.sessionId : 'default';
+    const intentData = alexaRequest?.intent?.slots || 'default';
+    const sessionId = session.sessionId || 'default';
     const { userId } = session.user;
 
     const parament = { data: intentData, sessionId, userId };
@@ -55,3 +55,9 @@ export default async (request: Request, response: Response) => {
     });
   }
 };
+
+// <speak>
+//     I want to tell you a secret.
+//         <amazon:effect name="whispered">I am not a real human.</amazon:effect>.
+//     Can you believe it?
+// </speak>

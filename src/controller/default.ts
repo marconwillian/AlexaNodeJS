@@ -10,11 +10,18 @@ export interface CountDB {
   amount: number;
 }
 
+export interface PaymentsReport extends CountDB {
+  sum: number;
+}
+
 export default {
   form: async ({ data, sessionId, userId }: Form) => {
-    const payments: CountDB[] = await PagProDB('payments')
+    const payments: PaymentsReport[] = await PagProDB('payments')
       .leftJoin('products', 'payments.pid', 'products.id')
-      .where('products.uid', 4)
+      .where('payments.affiliate_id', 380)
+      .where('payments.date_created', '>', '2020-11-01 00:00:00')
+      .where('payments.status_finance_id', 3)
+      .sum('paid_amount', { as: 'sum' })
       .count('*', { as: 'amount' });
 
     console.log(payments);
@@ -28,16 +35,24 @@ export default {
           texta: 'Bem vindo a Plataforma B4You.',
           ssml: `
             <speak>
-              <say-as interpret-as="interjection">hey</say-as> Marcon!
-              Bem vindo a Plataforma  <lang xml:lang="en-US">B4You</lang>.
-              <break time="3s"/>
-              Atualmente você já fez ${payments[0].amount} vendas na plataforma.
+              <say-as interpret-as="interjection">oi</say-as> Gabriel!
+              Seja bem vindo a  <lang xml:lang="en-US">B4You</lang>.
+              <break time="1s"/>
+              Este mes você já fez ${
+                payments[0].amount
+              } vendas somando um total de R$ ${payments[0].sum
+            .toString()
+            .replace('.', ',')}.
             </speak>
           `
         },
         shouldEndSession: false
       }
     };
+
+    // ssml bravo; mano do céu;	muito bem; quem me dera
+
+    // 380
 
     return resultado;
   },

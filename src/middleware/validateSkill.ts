@@ -1,12 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
 export default (request: Request, response: Response, next: NextFunction) => {
-  console.log(JSON.stringify(request.headers));
-  console.log('signaturecertchainurl', request.headers.signaturecertchainurl);
-
   const xForwardedFor = request.header('x-forwarded-for');
   const { remoteAddress } = request.connection;
   const { session } = request.body;
+  const signatureCertChainUrl = request.headers.signaturecertchainurl;
 
   let ip = '';
   if (xForwardedFor || request.connection.remoteAddress) {

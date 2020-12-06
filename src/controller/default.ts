@@ -19,8 +19,6 @@ export default {
     const payments: PaymentsReport[] = await PagProDB('payments')
       .leftJoin('products', 'payments.pid', 'products.id')
       .where('payments.affiliate_id', 380)
-      .where('payments.date_created', '>', '2020-11-01 00:00:00')
-      .where('payments.status_finance_id', 3)
       .sum('paid_amount', { as: 'sum' })
       .count('*', { as: 'amount' });
 
@@ -45,6 +43,21 @@ export default {
             .replace('.', ',')}.
             </speak>
           `
+        },
+        card: {
+          type: 'Standard',
+          title: 'Bem vindo a Plataforma',
+          text: `Vendas este mes: ${
+            payments[0].amount
+          },\n Valor das Vendas: R$ ${payments[0].sum
+            .toString()
+            .replace('.', ',')}`,
+          image: {
+            smallImageUrl:
+              'https://cdn.pixabay.com/photo/2017/08/25/09/19/los-angeles-2679490_960_720.jpg',
+            largeImageUrl:
+              'https://cdn.pixabay.com/photo/2017/08/25/09/19/los-angeles-2679490_960_720.jpg'
+          }
         },
         shouldEndSession: false
       }
